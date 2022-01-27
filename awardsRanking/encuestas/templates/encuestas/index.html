@@ -1,0 +1,16 @@
+
+<h1>Encuesta de crypto</h1>
+{% if latest_question_list %}
+    <ul>
+    {% for pregunta in latest_question_list  %}
+        <li>
+            <a href="{% url 'encuestas:detalle_pregunta' pregunta.id %}"> 
+                 {{pregunta.pregunta_text}} 
+            </a>
+        </li>        
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available</p>
+{% endif %}
+    
