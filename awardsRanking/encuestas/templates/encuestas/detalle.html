@@ -1,27 +1,42 @@
-<form action="{% url 'encuestas:voto' pregunta.id %}" method="post">
-{% csrf_token %}
-<fieldset>
-    <legend><h1>{{ pregunta.pregunta_text}}</h1></legend>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'encuestas/style.css' %}">
+    <link rel="stylesheet" href="{% static 'encuestas/detail.css' %}">
+    <title>{{ pregunta.pregunta_text }}</title>
     
-    {% if error_message %}
-        <p><strong>{{ error_message }} </strong></p>
-    {% endif %}
-    
-    {% for opcion in pregunta.opciones_set.all %}
-        <input 
-            type="radio"
-            name="opcion"
-            id="opcion{{ forloop.counter }}"
-            value="{{opcion.id}}"
-        >
-        <label for="opcion{{ forloop.counter }}">
-            {{ opcion.opcion_text}}
-        </label>
-        <br>
-    {% endfor %}
-</fieldset>
-<input type="submit" value="Votar!">
-</form>
+</head>
+<body>
+    <form action="{% url 'encuestas:voto' pregunta.id %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend><h1>{{ pregunta.pregunta_text}}</h1></legend>
+            
+            {% if error_message %}
+                <p><strong>{{ error_message }} </strong></p>
+            {% endif %}
+            
+            {% for opcion in pregunta.opciones_set.all %}
+                <input 
+                    type="radio"
+                    name="opcion"
+                    id="opcion{{ forloop.counter }}"
+                    value="{{opcion.id}}"
+                >
+                <label for="opcion{{ forloop.counter }}">
+                    {{ opcion.opcion_text}}
+                </label>
+                <br>
+            {% endfor %}
+        </fieldset>
+        <input type="submit" value="Votar!">
+    </form>
+</body>
+</html>
 
 
 

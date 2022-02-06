@@ -1,16 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'encuestas/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'encuestas/style.css' %}">
+    <title>Encuesta Crypto</title>
+</head>
+<body>
+    <header>
+        <h1>Encuesta Crypto</h1>
+    </header>
+    <main>
+        {% if latest_question_list %}
+            <ul>
+            {% for pregunta in latest_question_list  %}
+                <li>
+                    <a href="{% url 'encuestas:detalle_pregunta' pregunta.id %}"> 
+                        {{pregunta.pregunta_text}} 
+                    </a>
+                </li>        
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No polls are available</p>
+        {% endif %}
+    </main>
+    <footer>
+        <a href="https://xtiv.com">Contacto</a>
+        <a href="#">¿Quieres fumar weed?</a>
+        <a href="#">Politica de privacidad</a>
+        <a href="#">Terminos y condiciones</a>
+    </footer>
+</body>
+</html>
 
-<h1>Encuesta de crypto</h1>
-{% if latest_question_list %}
-    <ul>
-    {% for pregunta in latest_question_list  %}
-        <li>
-            <a href="{% url 'encuestas:detalle_pregunta' pregunta.id %}"> 
-                 {{pregunta.pregunta_text}} 
-            </a>
-        </li>        
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available</p>
-{% endif %}
+
+
+
     

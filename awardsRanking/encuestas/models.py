@@ -22,3 +22,4 @@ class Opciones(models.Model):
     def __str__(self):
         return self.opcion_text
 
+
